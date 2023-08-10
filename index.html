@@ -59,13 +59,60 @@
 <script>
 
 
+
     let inputValue = document.getElementById("result")
 
 
-    let one = document.getElementById('one')
-    one.addEventListener('click',function(){
-    inputValue.innerText+='1'
+    let numberButtons = document.querySelectorAll('.first-row button,.second-row button,.third-row button,.fourth-row button')
+
+
+    numberButtons.forEach(function(button){
+        button.addEventListener('click',function(){
+            if(inputValue.innerText.length<3){
+                inputValue.innerText+=button.innerText;
+            }
+        })
     })
+    // let one = document.getElementById('one')
+    // one.addEventListener('click',function(){
+    //     inputValue.innerText+='1'
+    // })
+    // let two = document.getElementById('two')
+    // two.addEventListener('click',function(){
+    //     inputValue.innerText+='2'
+    // })
+    // let three = document.getElementById('three')
+    // three.addEventListener('click',function(){
+    //     inputValue.innerText+='3'
+    // })
+    // let four = document.getElementById('four')
+    // four.addEventListener('click',function(){
+    //     inputValue.innerText+='4'
+    // })
+    // let five = document.getElementById('five')
+    // five.addEventListener('click',function(){
+    //     inputValue.innerText+='5'
+    // })
+    // let six = document.getElementById('six')
+    // six.addEventListener('click',function(){
+    //     inputValue.innerText+='6'
+    // })
+    // let seven = document.getElementById('seven')
+    // seven.addEventListener('click',function(){
+    //     inputValue.innerText+='7'
+    // })
+    // let eight = document.getElementById('eight')
+    // eight.addEventListener('click',function(){
+    //     inputValue.innerText+='8'
+    // })
+    // let nine = document.getElementById('nine')
+    // nine.addEventListener('click',function(){
+    //     inputValue.innerText+='9'
+    // })
+    // let zero = document.getElementById('zero')
+    // zero.addEventListener('click',function(){
+    //     inputValue.innerText+='0'
+    // })
 
 </script>
 </body>
