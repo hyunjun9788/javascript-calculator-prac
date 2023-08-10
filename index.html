@@ -9,6 +9,16 @@
 </head>
 
 <style>
+    .result-back {
+        display: flex;
+
+    }
+
+    #back {
+        margin-left: 3px;
+
+    }
+
     button {
         width: 60px;
         height: 30px;
@@ -20,99 +30,72 @@
     }
 
 
-    #result{
-        border:1px solid black;
-        width:250px;
+    #result {
+        border: 1px solid black;
+        width: 250px;
         padding-left: 3px;
-        height:30px;
+        height: 30px;
         padding-top: 3px;
+
+    }
+
+    button#zero {
+        width: 191px;
     }
 </style>
 <body>
-<div id="result"></div>
+<div class="result-back">
+    <div id="result"></div>
+    <button id="back">←</button>
+</div>
 <div class="first-row">
     <button id="one">1</button>
     <button id="two">2</button>
     <button id="three">3</button>
-    <button id="plus">+</button>
-
 </div>
+
 <div class="second-row">
     <button id="four">4</button>
     <button id="five">5</button>
     <button id="six">6</button>
-    <button id="minus">-</button>
 </div>
 <div class="third-row">
     <button id="seven">7</button>
     <button id="eight">8</button>
     <button id="nine">9</button>
-    <button id="x">*</button>
+
 </div>
 <div class="fourth-row">
     <button id="zero">0</button>
+
+</div>
+<div>
+    <button id="plus">+</button>
+    <button id="minus">-</button>
+    <button id="x">*</button>
+</div>
+<div>
     <button id="dot">.</button>
-    <button id="back">←</button>
+    <button id="ac">AC</button>
     <button id="division">/</button>
 </div>
-
 <script>
 
 
-
     let inputValue = document.getElementById("result")
-
-
+    let back = document.getElementById('back')
     let numberButtons = document.querySelectorAll('.first-row button,.second-row button,.third-row button,.fourth-row button')
 
-
-    numberButtons.forEach(function(button){
-        button.addEventListener('click',function(){
-            if(inputValue.innerText.length<3){
-                inputValue.innerText+=button.innerText;
+    back.addEventListener('click',function(){
+       inputValue.innerText=inputValue.innerText.slice(0,-1)
+    })
+    numberButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            if (inputValue.innerText.length < 3) {
+                inputValue.innerText += button.innerText;
             }
         })
     })
-    // let one = document.getElementById('one')
-    // one.addEventListener('click',function(){
-    //     inputValue.innerText+='1'
-    // })
-    // let two = document.getElementById('two')
-    // two.addEventListener('click',function(){
-    //     inputValue.innerText+='2'
-    // })
-    // let three = document.getElementById('three')
-    // three.addEventListener('click',function(){
-    //     inputValue.innerText+='3'
-    // })
-    // let four = document.getElementById('four')
-    // four.addEventListener('click',function(){
-    //     inputValue.innerText+='4'
-    // })
-    // let five = document.getElementById('five')
-    // five.addEventListener('click',function(){
-    //     inputValue.innerText+='5'
-    // })
-    // let six = document.getElementById('six')
-    // six.addEventListener('click',function(){
-    //     inputValue.innerText+='6'
-    // })
-    // let seven = document.getElementById('seven')
-    // seven.addEventListener('click',function(){
-    //     inputValue.innerText+='7'
-    // })
-    // let eight = document.getElementById('eight')
-    // eight.addEventListener('click',function(){
-    //     inputValue.innerText+='8'
-    // })
-    // let nine = document.getElementById('nine')
-    // nine.addEventListener('click',function(){
-    //     inputValue.innerText+='9'
-    // })
-    // let zero = document.getElementById('zero')
-    // zero.addEventListener('click',function(){
-    //     inputValue.innerText+='0'
-    // })
 
 </script>
 </body>
