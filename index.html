@@ -7,46 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
-
-<style>
-    .result-back {
-        display: flex;
-
-    }
-
-    #back {
-        margin-left: 3px;
-
-    }
-
-    button {
-        width: 60px;
-        height: 30px;
-        margin-bottom: 3px;
-    }
-
-    .first-row {
-        margin-top: 10px;
-    }
-
-
-    #result {
-        border: 1px solid black;
-        width: 250px;
-        padding-left: 3px;
-        height: 30px;
-        padding-top: 3px;
-
-    }
-
-    #result-value {
-        width: 191px;
-    }
-
-    button#zero {
-        width: 191px;
-    }
-</style>
 <body>
 <div class="calculator">
     <input class="display" type="text" readonly>
@@ -69,82 +29,75 @@
         <button onclick="input('0')">0</button>
 
 
-        <button onclick="input('+')">+</button>
-        <button onclick="input('-')">-</button>
-        <button onclick="input('*')">*</button>
+        <button onclick="sign('+')">+</button>
+        <button onclick="sign('-')">-</button>
+        <button onclick="sign('*')">*</button>
 
         <button onclick="input('.')">.</button>
         <button onclick="reset('ac')">AC</button>
-        <button onclick="input('/')">/</button>
+        <button onclick="sign('/')">/</button>
 
         <button onclick="calculate('=')">=</button>
     </div>
 </div>
 <script>
-
-
-    let inputString = '';
-    let displayValue = '';
-    let resultValue = '';
+    let currentValue = ''
+    let storedNumber=null
     let operator = ''
 
-    function input(value) {
-        inputString += value;
-        displayValue += value;
 
-        if (value === '/' || value === '*' || value === '+' || value === '-') {
-            operator += value
-
+    function updateDisplay(){
+        const display = document.querySelector('.display')
+        display.value = currentValue
+    }
+    function input(value){
+        if(value==='.' && currentValue.includes('.')){
+            return
         }
-        document.querySelector('.display').value = displayValue
-
-
-
+        if(currentValue.length>=3){
+            return
+        }
+        const newInput = currentValue+value
+        currentValue=newInput
+        updateDisplay()
     }
 
-    function calculate() {
-        console.log(inputString)
-        console.log(document.querySelector('.display').value)
-        let calculation = inputString.split(operator)
-
-        let front = parseFloat(calculation[0])
-        console.log(front)
-
-        let back = parseFloat(calculation[1])
-
-        switch (operator) {
-            case '+':
-                resultValue = front + back
-                break
-            case '-':
-                resultValue = front - back
-                break
-            case '*':
-                resultValue = front * back
-                break
-            case '/':
-                resultValue = front / back
-                break
-            default:
-                resultValue = ''
-        }
-        document.querySelector('.display').value = resultValue;
-        inputString = resultValue.toString()
-        displayValue = ''
-    }
-    function reset(value) {
-        if (value === 'ac') {
-            inputString=''
-            displayValue=''
-            resultValue=''
-            operator=''
-            document.querySelector('.display').value= ""
-
-
+    function sign (operatorBtn){
+        if(currentValue!==''){
+            storedNumber=parseFloat(currentValue)
+            currentValue=''
+            operator=operatorBtn
         }
     }
 
+    function calculate(){
+        if(storedNumber!==null && operator !== ''&& currentValue !== ''){
+            const num1 = storedNumber
+            const num2 = parseFloat(currentValue)
 
+            let result = 0
+            if(operator === '+'){
+                result=num1+num2
+            }else if (operator === '-') {
+                result = num1 - num2
+
+            } else if (operator === '*') {
+                result = num1 * num2
+
+            } else if (operator === '/') {
+                result = num1 / num2
+
+            }
+            currentValue=(Math.floor(result).toString())
+            storedNumber=null
+            operator=null
+            updateDisplay()
+        }
+    }
+    function reset(){
+        currentValue=0
+        updateDisplay()
+    }
 </script>
 </body>
 </html>
