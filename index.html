@@ -39,63 +39,107 @@
 
     }
 
+    #result-value {
+        width: 191px;
+    }
+
     button#zero {
         width: 191px;
     }
 </style>
 <body>
-<div class="result-back">
-    <div id="result"></div>
-    <button id="back">←</button>
-</div>
-<div class="first-row">
-    <button id="one">1</button>
-    <button id="two">2</button>
-    <button id="three">3</button>
-</div>
+<div class="calculator">
+    <input class="display" type="text" readonly>
+    <div>
+        <button onclick="input('1')">1</button>
+        <button onclick="input('2')">2</button>
+        <button onclick="input('3')">3</button>
 
-<div class="second-row">
-    <button id="four">4</button>
-    <button id="five">5</button>
-    <button id="six">6</button>
-</div>
-<div class="third-row">
-    <button id="seven">7</button>
-    <button id="eight">8</button>
-    <button id="nine">9</button>
 
-</div>
-<div class="fourth-row">
-    <button id="zero">0</button>
+        <button onclick="input('4')">4</button>
+        <button onclick="input('5')">5</button>
+        <button onclick="input('6')">6</button>
 
-</div>
-<div>
-    <button id="plus">+</button>
-    <button id="minus">-</button>
-    <button id="x">*</button>
-</div>
-<div>
-    <button id="dot">.</button>
-    <button id="ac">AC</button>
-    <button id="division">/</button>
+
+        <button onclick="input('7')">7</button>
+        <button onclick="input('8')">8</button>
+        <button onclick="input('9')">9</button>
+
+
+        <button onclick="input('0')">0</button>
+
+
+        <button onclick="input('+')">+</button>
+        <button onclick="input('-')">-</button>
+        <button onclick="input('*')">*</button>
+
+        <button onclick="input('.')">.</button>
+        <button onclick="reset('ac')">AC</button>
+        <button onclick="input('/')">/</button>
+
+        <button onclick="calculate('=')">=</button>
+    </div>
 </div>
 <script>
 
 
-    let inputValue = document.getElementById("result")
-    let back = document.getElementById('back')
-    let numberButtons = document.querySelectorAll('.first-row button,.second-row button,.third-row button,.fourth-row button')
+    let inputString = '';
+    let displayValue = '';
+    let resultValue = '';
+    let operator = ''
 
-    back.addEventListener('click',function(){
-       inputValue.innerText=inputValue.innerText.slice(0,-1)
-    })
-    numberButtons.forEach(function (button) {
-        button.addEventListener('click', function () {
-            if (inputValue.innerText.length < 3) {
-                inputValue.innerText += button.innerText;
-            }
-        })
-    })
+    function input(value) {
+        inputString += value;
+        displayValue += value;
+
+        if (value === '/' || value === '*' || value === '+' || value === '-') {
+            operator += value
+
+        }
+        document.querySelector('.display').value = displayValue
+
+
+
+    }
+
+    function calculate() {
+        console.log(inputString)
+        console.log(document.querySelector('.display').value)
+        let calculation = inputString.split(operator)
+
+        let front = parseFloat(calculation[0])
+        console.log(front)
+
+        let back = parseFloat(calculation[1])
+
+        switch (operator) {
+            case '+':
+                resultValue = front + back
+                break
+            case '-':
+                resultValue = front - back
+                break
+            case '*':
+                resultValue = front * back
+                break
+            case '/':
+                resultValue = front / back
+                break
+            default:
+                resultValue = ''
+        }
+        document.querySelector('.display').value = resultValue;
+        inputString = resultValue.toString()
+        displayValue = ''
+    }
+    function reset(value) {
+        if (value === 'ac') {
+            document.querySelector('.display').value = ''
+            console.log(document.querySelector('.display').value)
+            return
+        }
+    }
+
 
 </script>
 </body>
