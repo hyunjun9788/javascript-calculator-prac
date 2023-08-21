@@ -49,9 +49,6 @@
         display.value = currentValue;
       }
       function onClickNumber(value) {
-        if (value === '.' && currentValue.includes('.')) {
-          return;
-        }
         if (currentValue.length < limitedInputLength) {
           const newInput =
             currentValue === '0' ? `${value}` : `${currentValue + value}`;
@@ -60,9 +57,13 @@
         }
       }
       function onClickDot() {
-        if (currentValue.length < limitedInputLength) {
-          const newInput = currentValue === '0' ? '.' : currentValue + '.';
+        if (
+          currentValue.length < limitedInputLength &&
+          !currentValue.includes('.')
+        ) {
+          const newInput = currentValue === '0' ? '.' : `${currentValue}.`;
           currentValue = newInput;
+          updateDisplay();
         }
       }
       function onClickOperator(operatorBtn) {
