@@ -10,40 +10,81 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="calculator">
+    <div class="container">
       <input
         class="display"
         placeholder="숫자를 입력해주세요"
         type="text"
         readonly
       />
-      <button onclick="onClickBackspace()">backspace</button>
-      <div>
-        <button onclick="onClickNumber('1')">1</button>
-        <button onclick="onClickNumber('2')">2</button>
-        <button onclick="onClickNumber('3')">3</button>
-
-        <button onclick="onClickNumber('4')">4</button>
-        <button onclick="onClickNumber('5')">5</button>
-        <button onclick="onClickNumber('6')">6</button>
-
-        <button onclick="onClickNumber('7')">7</button>
-        <button onclick="onClickNumber('8')">8</button>
-        <button onclick="onClickNumber('9')">9</button>
-
-        <button onclick="onClickNumber('0')">0</button>
-
-        <button onclick="onClickOperator('+')">+</button>
-        <button onclick="onClickOperator('-')">-</button>
-        <button onclick="onClickOperator('*')">*</button>
-
-        <button onclick="onClickDot()">.</button>
-        <button onclick="onClickReset()">AC</button>
-        <button onclick="onClickOperator('/')">/</button>
-
-        <button onclick="onClickResult('=')">=</button>
-      </div>
+      <button onclick="onClickBackspace()">backSpace</button></div>
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <button onclick="onClickNumber('1')">1</button>
+            </td>
+            <td>
+              <button onclick="onClickNumber('2')">2</button>
+            </td>
+            <td>
+              <button onclick="onClickNumber('3')">3</button>
+            </td>
+            <td>
+              <button onclick="onClickReset()">AC</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button onclick="onClickNumber('4')">4</button>
+            </td>
+            <td>
+              <button onclick="onClickNumber('5')">5</button>
+            </td>
+            <td>
+              <button onclick="onClickNumber('6')">6</button>
+            </td>
+            <td>
+              <button onclick="onClickOperator('+')">+</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button onclick="onClickNumber('7')">7</button>
+            </td>
+            <td>
+              <button onclick="onClickNumber('8')">8</button>
+            </td>
+            <td>
+              <button onclick="onClickNumber('9')">9</button>
+            </td>
+            <td>
+              <button onclick="onClickOperator('-')">-</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button onclick="onClickDot()">.</button>
+            </td>
+            <td>
+              <button onclick="onClickNumber('0')">0</button>
+            </td>
+            <td>
+              <button onclick="onClickOperator('/')">/</button>
+            </td>
+            <td>
+              <button onclick="onClickOperator('*')">*</button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4">
+              <button onclick="onClickResult('=')">=</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+
     <script>
       let currentValue = '';
       let firstInputValue = null;
