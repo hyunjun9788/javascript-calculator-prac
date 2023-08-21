@@ -31,8 +31,8 @@
         <button onclick="onClickOperator('-')">-</button>
         <button onclick="onClickOperator('*')">*</button>
 
-        <button onclick="input('.')">.</button>
-        <button onclick="reset('ac')">AC</button>
+        <button onclick="onClickDot('.')">.</button>
+        <button onclick="reset()">AC</button>
         <button onclick="onClickOperator('/')">/</button>
 
         <button onclick="calculate('=')">=</button>
@@ -53,12 +53,18 @@
           return;
         }
         if (currentValue.length < limitedInputLength) {
-          const newInput = currentValue + value;
+          const newInput =
+            currentValue === '0' ? `${value}` : `${currentValue + value}`;
           currentValue = newInput;
           updateDisplay();
         }
       }
-
+      function onClickDot() {
+        if (currentValue.length < limitedInputLength) {
+          const newInput = currentValue === '0' ? '.' : currentValue + '.';
+          currentValue = newInput;
+        }
+      }
       function onClickOperator(operatorBtn) {
         if (currentValue !== '') {
           storedNumber = parseFloat(currentValue);
@@ -89,7 +95,7 @@
         }
       }
       function reset() {
-        currentValue = 0;
+        currentValue = '0';
         updateDisplay();
       }
     </script>
