@@ -32,10 +32,10 @@
         <button onclick="onClickOperator('*')">*</button>
 
         <button onclick="onClickDot('.')">.</button>
-        <button onclick="reset()">AC</button>
+        <button onclick="onClickReset()">AC</button>
         <button onclick="onClickOperator('/')">/</button>
 
-        <button onclick="calculate('=')">=</button>
+        <button onclick="onClickResult('=')">=</button>
       </div>
     </div>
     <script>
@@ -74,7 +74,7 @@
         }
       }
 
-      function calculate() {
+      function onClickResult() {
         if (storedNumber !== null && operator !== '' && currentValue !== '') {
           const num1 = storedNumber;
           const num2 = parseFloat(currentValue);
@@ -95,7 +95,7 @@
           updateDisplay();
         }
       }
-      function reset() {
+      function onClickReset() {
         currentValue = '0';
         updateDisplay();
       }
