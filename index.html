@@ -40,7 +40,7 @@
     </div>
     <script>
       let currentValue = '';
-      let storedNumber = null;
+      let firstInputValue = null;
       let operator = '';
       const limitedInputLength = 3;
 
@@ -68,29 +68,37 @@
       }
       function onClickOperator(operatorBtn) {
         if (currentValue !== '') {
-          storedNumber = parseFloat(currentValue);
+          firstInputValue = parseFloat(currentValue);
           currentValue = '';
           operator = operatorBtn;
         }
       }
 
+      function calculateResult(num1, num2, operator) {
+        let result = 0;
+        if (operator === '+') {
+          result = num1 + num2;
+        } else if (operator === '-') {
+          result = num1 - num2;
+        } else if (operator === '*') {
+          result = num1 * num2;
+        } else if (operator === '/') {
+          result = num1 / num2;
+        }
+        return Math.floor(result).toString();
+      }
+
       function onClickResult() {
-        if (storedNumber !== null && operator !== '' && currentValue !== '') {
-          const num1 = storedNumber;
+        if (
+          firstInputValue !== null &&
+          operator !== '' &&
+          currentValue !== ''
+        ) {
+          const num1 = firstInputValue;
           const num2 = parseFloat(currentValue);
 
-          let result = 0;
-          if (operator === '+') {
-            result = num1 + num2;
-          } else if (operator === '-') {
-            result = num1 - num2;
-          } else if (operator === '*') {
-            result = num1 * num2;
-          } else if (operator === '/') {
-            result = num1 / num2;
-          }
-          currentValue = Math.floor(result).toString();
-          storedNumber = null;
+          currentValue = calculateResult(num1, num2, operator);
+          firstInputValue = null;
           operator = null;
           updateDisplay();
         }
