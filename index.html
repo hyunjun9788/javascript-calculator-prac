@@ -1,103 +1,97 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
-</head>
-<body>
-<div class="calculator">
-    <input class="display" type="text" readonly>
-    <div>
-        <button onclick="input('1')">1</button>
-        <button onclick="input('2')">2</button>
-        <button onclick="input('3')">3</button>
+  </head>
+  <body>
+    <div class="calculator">
+      <input class="display" type="text" readonly />
+      <div>
+        <button onclick="onClickNumber('1')">1</button>
+        <button onclick="onClickNumber('2')">2</button>
+        <button onclick="onClickNumber('3')">3</button>
 
+        <button onclick="onClickNumber('4')">4</button>
+        <button onclick="onClickNumber('5')">5</button>
+        <button onclick="onClickNumber('6')">6</button>
 
-        <button onclick="input('4')">4</button>
-        <button onclick="input('5')">5</button>
-        <button onclick="input('6')">6</button>
+        <button onclick="onClickNumber('7')">7</button>
+        <button onclick="onClickNumber('8')">8</button>
+        <button onclick="onClickNumber('9')">9</button>
 
+        <button onclick="onClickNumber('0')">0</button>
 
-        <button onclick="input('7')">7</button>
-        <button onclick="input('8')">8</button>
-        <button onclick="input('9')">9</button>
-
-
-        <button onclick="input('0')">0</button>
-
-
-        <button onclick="sign('+')">+</button>
-        <button onclick="sign('-')">-</button>
-        <button onclick="sign('*')">*</button>
+        <button onclick="onClickOperator('+')">+</button>
+        <button onclick="onClickOperator('-')">-</button>
+        <button onclick="onClickOperator('*')">*</button>
 
         <button onclick="input('.')">.</button>
         <button onclick="reset('ac')">AC</button>
-        <button onclick="sign('/')">/</button>
+        <button onclick="onClickOperator('/')">/</button>
 
         <button onclick="calculate('=')">=</button>
+      </div>
     </div>
-</div>
-<script>
-    let currentValue = ''
-    let storedNumber=null
-    let operator = ''
+    <script>
+      let currentValue = '';
+      let storedNumber = null;
+      let operator = '';
+      const limitedInputLength = 3;
 
-
-    function updateDisplay(){
-        const display = document.querySelector('.display')
-        display.value = currentValue
-    }
-    function input(value){
-        if(value==='.' && currentValue.includes('.')){
-            return
+      function updateDisplay() {
+        const display = document.querySelector('.display');
+        display.value = currentValue;
+      }
+      function onClickNumber(value) {
+        if (value === '.' && currentValue.includes('.')) {
+          return;
         }
-        if(currentValue.length>=3){
-            return
+        if (currentValue.length < limitedInputLength) {
+          const newInput = currentValue + value;
+          currentValue = newInput;
+          updateDisplay();
         }
-        const newInput = currentValue+value
-        currentValue=newInput
-        updateDisplay()
-    }
+      }
 
-    function sign (operatorBtn){
-        if(currentValue!==''){
-            storedNumber=parseFloat(currentValue)
-            currentValue=''
-            operator=operatorBtn
+      function onClickOperator(operatorBtn) {
+        if (currentValue !== '') {
+          storedNumber = parseFloat(currentValue);
+          currentValue = '';
+          operator = operatorBtn;
         }
-    }
+      }
 
-    function calculate(){
-        if(storedNumber!==null && operator !== ''&& currentValue !== ''){
-            const num1 = storedNumber
-            const num2 = parseFloat(currentValue)
+      function calculate() {
+        if (storedNumber !== null && operator !== '' && currentValue !== '') {
+          const num1 = storedNumber;
+          const num2 = parseFloat(currentValue);
 
-            let result = 0
-            if(operator === '+'){
-                result=num1+num2
-            }else if (operator === '-') {
-                result = num1 - num2
-
-            } else if (operator === '*') {
-                result = num1 * num2
-
-            } else if (operator === '/') {
-                result = num1 / num2
-
-            }
-            currentValue=(Math.floor(result).toString())
-            storedNumber=null
-            operator=null
-            updateDisplay()
+          let result = 0;
+          if (operator === '+') {
+            result = num1 + num2;
+          } else if (operator === '-') {
+            result = num1 - num2;
+          } else if (operator === '*') {
+            result = num1 * num2;
+          } else if (operator === '/') {
+            result = num1 / num2;
+          }
+          currentValue = Math.floor(result).toString();
+          storedNumber = null;
+          operator = null;
+          updateDisplay();
         }
-    }
-    function reset(){
-        currentValue=0
-        updateDisplay()
-    }
-</script>
-</body>
+      }
+      function reset() {
+        currentValue = 0;
+        updateDisplay();
+      }
+    </script>
+  </body>
 </html>
